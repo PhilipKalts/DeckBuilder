@@ -26,7 +26,7 @@ public class GetCards : MonoBehaviour
     [SerializeField] string[] pokemonNames;
 
 
-    public List<Card> Cards;
+    //public List<Card> Cards;
     public List<CardButton> CardButtons;
 
 
@@ -62,20 +62,28 @@ public class GetCards : MonoBehaviour
 
 
         // New Instance of the class
-        Card card = new Card()
-        {
-            Name = allCards[0]["name"],
-            HP = allCards[0]["hp"],
-            ImageURL = spriteUrl,
-            Texture = DownloadHandlerTexture.GetContent(uwrTexture)
-        };
+        //Card card = new Card()
+        //{
+        //    Name = allCards[0]["name"],
+        //    HP = allCards[0]["hp"],
+        //    ImageURL = spriteUrl,
+        //    Texture = DownloadHandlerTexture.GetContent(uwrTexture)
+        //};
 
-        Cards.Add(card);
+        //Cards.Add(card);
 
-        GameObject newCardObj = Instantiate(pokemonCardPrefab);
-        newCardObj.transform.parent = cardsParent.transform;
+
+        // Instantiate new Card
+        RectTransform newCardObj = Instantiate(pokemonCardPrefab).GetComponent<RectTransform>();
+        newCardObj.SetParent(cardsParent.transform);
+        newCardObj.name += ": " + allCards[0]["name"];
+
         CardButton button = newCardObj.GetComponent<CardButton>();
-        button.Card = card;
+
+        button.Card.Name = allCards[0]["name"];
+        button.Card.HP = allCards[0]["hp"];
+        button.Card.ImageURL = spriteUrl;
+        button.Card.Texture = DownloadHandlerTexture.GetContent(uwrTexture);
 
         CardButtons.Add(button);
     }

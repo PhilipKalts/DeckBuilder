@@ -35,6 +35,8 @@ public class CardsManager : MonoBehaviour
     public int MaxDeckCards;
     public List<string> MyCards;
 
+    public List<string>[] MyDecks;
+
 
     //*****Serialized*****//
     [SerializeField] GameObject pokemonCardPrefab;

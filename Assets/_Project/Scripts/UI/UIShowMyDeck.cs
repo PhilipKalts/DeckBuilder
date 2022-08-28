@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /* The purpose of this script is:
@@ -7,6 +8,38 @@ using UnityEngine;
 public class UIShowMyDeck : MonoBehaviour
 {
     List<GameObject> myCardsObj = new List<GameObject>();
+
+    [SerializeField] TMP_Dropdown dropdown;
+
+
+    #region Dropdown
+
+    public void DropdownChanged()
+    {
+        // All Cards
+        if (dropdown.value == 0)
+        {
+            ActivateAllCards();
+        }
+        // Deck 1
+        else if (dropdown.value == 1)
+        {
+
+        }
+        // Deck 2
+        else if (dropdown.value == 2)
+        {
+
+        }
+        // Deck 3
+        else if (dropdown.value == 3)
+        {
+
+        }
+    }
+
+    #endregion
+
 
     public void ShowMyDeck()
     {

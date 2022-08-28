@@ -9,17 +9,72 @@ public class UIButtons : MonoBehaviour
 {
     #region Variables
 
+    [SerializeField] TMP_Dropdown dropdown;
     [SerializeField] TextMeshProUGUI txtRarity, txtType;
 
-    UIResetScrollbar resetScrollbar;
+
 
     int rarityIndex, typeIndex;
+    GameObject panelRarity, panelType; 
+
+    UIResetScrollbar resetScrollbar;
 
     #endregion
 
 
 
-    private void Start() => resetScrollbar = GetComponent<UIResetScrollbar>();
+    #region Start
+
+    private void Start()
+    {
+        resetScrollbar = GetComponent<UIResetScrollbar>();
+        panelRarity = txtRarity.gameObject.transform.parent.gameObject;
+        panelType = txtType.gameObject.transform.parent.gameObject;
+    }
+
+    #endregion
+
+
+
+    #region Dropdown
+
+    public void ChangeDropDown()
+    {
+        // No sorting
+        if (dropdown.value == 0)
+        {
+            ActivatePanel(null);
+        }
+        // Sort by HP
+        else if (dropdown.value == 1)
+        {
+            ActivatePanel(null);
+            SortByHP();
+        }
+        // Sort by Rarity
+        else if (dropdown.value == 2)
+        {
+            ActivatePanel(panelRarity);
+            SortByRarity();
+        }
+        // Sort by Type
+        else if (dropdown.value == 3)
+        {
+            ActivatePanel(panelType);
+            SortByType();
+        }
+    }
+
+
+    void ActivatePanel(GameObject activatePanel)
+    {
+        panelType.gameObject.SetActive(false);
+        panelRarity.gameObject.SetActive(false);
+
+        if (activatePanel != null) activatePanel.gameObject.SetActive(true);
+    }
+
+    #endregion
 
 
 
@@ -154,4 +209,5 @@ public class UIButtons : MonoBehaviour
     }
 
     #endregion
+
 }

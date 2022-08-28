@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 640788496269569527}
   - component: {fileID: -1401210993857882632}
   - component: {fileID: -234013724927072313}
+  - component: {fileID: -1624786875803592391}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -62,10 +63,24 @@ MonoBehaviour:
   Cards: []
   TotalRarities: []
   TotalTypes: []
-  pokemonCardPrefab: {fileID: 8266962865483938448, guid: 7137a2d643adf6e4c80fb21fae237369,
+  MaxDeckCards: 2
+  MyCards: []
+  pokemonCardPrefab: {fileID: 8266962865483938448, guid: caff109cdb568cb40bae30acd55c2628,
     type: 3}
   pokemonNames:
   - Dunsparce
   - Pikachu
   - Charizard
   - Charmander
+--- !u!114 &-1624786875803592391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640788496269569526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f88a431689069d4f80ca779ef62a41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

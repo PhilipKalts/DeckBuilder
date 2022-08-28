@@ -32,6 +32,9 @@ public class CardsManager : MonoBehaviour
     public List<string> TotalTypes = new List<string>();
     public Dictionary<string, List<Card>> DictType = new Dictionary<string, List<Card>>();
 
+    public int MaxDeckCards;
+    public List<string> MyCards;
+
 
     //*****Serialized*****//
     [SerializeField] GameObject pokemonCardPrefab;
@@ -94,23 +97,7 @@ public class CardsManager : MonoBehaviour
 
             Cards.Add(card);
             ChecKDictionary(ref DictRarity, ref TotalRarities, card, card.CardData.Rarity);
-            //if (DictRarity.ContainsKey(card.CardData.Rarity))
-            //    DictRarity[card.CardData.Rarity].Add(card);
-            //else
-            //{
-            //    TotalRarities.Add(card.CardData.Rarity);
-            //    DictRarity[card.CardData.Rarity] = new List<Card>();
-            //    DictRarity[card.CardData.Rarity].Add(card);
-            //}
             ChecKDictionary(ref DictType, ref TotalTypes, card, card.CardData.Type);
-            //if (DictType.ContainsKey(card.CardData.Type))
-            //    DictType[card.CardData.Type].Add(card);
-            //else
-            //{
-            //    TotalTypes.Add(card.CardData.Type);
-            //    DictType[card.CardData.Type] = new List<Card>();
-            //    DictType[card.CardData.Type].Add(card);
-            //}
 
 
             // If all of the cards are created Invoke the event

@@ -21,39 +21,37 @@ public class UIShowMyDeck : MonoBehaviour
         {
             ActivateAllCards();
         }
-        // Deck 1
-        else if (dropdown.value == 1)
-        {
-
-        }
-        // Deck 2
-        else if (dropdown.value == 2)
-        {
-
-        }
-        // Deck 3
-        else if (dropdown.value == 3)
-        {
-
-        }
+        else ShowMyDeck(dropdown.value - 1);
     }
 
     #endregion
 
 
-    public void ShowMyDeck()
+    public void ShowMyDeck(int deckIndex)
     {
         myCardsObj.Clear();
-        for (int i = 0; i < GameManager.Instance.CardsManager.MyCards.Count; i++)
+        List<string> cards = new List<string>();
+        cards = GameManager.Instance.CardsManager.AllDecks.MyCards[deckIndex];
+
+        for (int i = 0; i < cards.Count; i++)
         {
             for (int j = 0; j < GameManager.Instance.CardsManager.Cards.Count; j++)
             {
-                if (GameManager.Instance.CardsManager.MyCards[i] == GameManager.Instance.CardsManager.Cards[j].CardData.ID)
-                {
+                if (cards[i] == GameManager.Instance.CardsManager.Cards[j].CardData.ID)
                     myCardsObj.Add(GameManager.Instance.CardsManager.Cards[j].gameObject);
-                }
             }
         }
+
+        //for (int i = 0; i < cards.Count; i++)
+        //{
+        //    for (int j = 0; j < GameManager.Instance.CardsManager.Cards.Count; j++)
+        //    {
+        //        if (cards[i] == GameManager.Instance.CardsManager.Cards[j].CardData.ID)
+        //        {
+        //            myCardsObj.Add(GameManager.Instance.CardsManager.Cards[j].gameObject);
+        //        }
+        //    }
+        //}
 
         for (int i = 0; i < GameManager.Instance.CardsManager.Cards.Count; i++) GameManager.Instance.CardsManager.Cards[i].gameObject.SetActive(false);
 

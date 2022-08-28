@@ -3,11 +3,21 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
 using System.Collections.Generic;
+using System.Xml;
 
 
 /* The purpose of this script is: to Instantiate all the cards we want the player to have access to
  * This script is attached to the GameManager GO so it can be called from anywhere at any time
 */
+
+/// <summary>
+/// This class has a 2D list. The first index represents the deck and the second the id of the cards
+/// This class is meant to be saved
+/// </summary>
+public class AllDecks
+{
+    public List<List<string>> MyCards = new List<List<string>>();
+}
 
 
 public class CardsManager : MonoBehaviour
@@ -20,6 +30,7 @@ public class CardsManager : MonoBehaviour
 
 
     //*****Hidden*****//
+    [HideInInspector]
     public GameObject CardsParent;
 
 
@@ -33,9 +44,8 @@ public class CardsManager : MonoBehaviour
     public Dictionary<string, List<Card>> DictType = new Dictionary<string, List<Card>>();
 
     public int MaxDeckCards;
-    public List<string> MyCards;
 
-    public List<string>[] MyDecks;
+    public AllDecks AllDecks = new AllDecks();
 
 
     //*****Serialized*****//
@@ -48,10 +58,16 @@ public class CardsManager : MonoBehaviour
 
     #endregion
 
-
+    
 
     private void Start()
     {
+        // Insert lists to the 2d List
+        for (int i = 0; i < 3; i++)
+        {
+            List<string> s = new List<string>();
+            AllDecks.MyCards.Add(s);
+        }
         CreateCards();
     }
 

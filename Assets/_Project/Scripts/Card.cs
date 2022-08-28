@@ -9,26 +9,15 @@ public class Card : MonoBehaviour
     public CardData CardData;
 
     RawImage rawImage;
-    Toggle toggle;
 
     private void Start()
     {
-        toggle = GetComponent<Toggle>();
         rawImage = GetComponent<RawImage>();
         rawImage.texture = CardData.Texture;
     }
 
-    public void ToggleCard()
+    public void ButtonPressCard()
     {
-        // If we want to add a card to our deck but we have reached the maximum number
-        if (toggle.isOn && GameManager.Instance.CardsManager.MyCards.Count >= GameManager.Instance.CardsManager.MaxDeckCards)
-        {
-            toggle.isOn = false;
-            GameManager.Instance.UIEventsManager.OnMaxDeck?.Invoke();
-            return;
-        }
-
-        if (toggle.isOn) GameManager.Instance.CardsManager.MyCards.Add(CardData.ID);
-        else GameManager.Instance.CardsManager.MyCards.Remove(CardData.ID);
+        GameManager.Instance.UIEventsManager.OnPressedCard?.Invoke(CardData);
     }
 }

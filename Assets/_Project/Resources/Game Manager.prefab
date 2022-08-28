@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CardsManager: {fileID: 0}
+  UIEventsManager: {fileID: 0}
 --- !u!114 &-234013724927072313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,13 +60,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474618614751d424a81719d4ced1c8b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardsParent: {fileID: 0}
+  CardsParent: {fileID: 8266962865483938448, guid: 7137a2d643adf6e4c80fb21fae237369,
+    type: 3}
   Cards: []
   TotalRarities: []
   TotalTypes: []
   MaxDeckCards: 2
-  MyCards: []
-  pokemonCardPrefab: {fileID: 8266962865483938448, guid: caff109cdb568cb40bae30acd55c2628,
+  MyDeck:
+    MyDecks:
+    - MyCards: []
+    - MyCards: []
+    - MyCards: []
+  pokemonCardPrefab: {fileID: 8266962865483938448, guid: 7137a2d643adf6e4c80fb21fae237369,
     type: 3}
   pokemonNames:
   - Dunsparce

@@ -73,9 +73,7 @@ public class CardsManager : MonoBehaviour
 
     void CreateCards()
     {
-        string url = "https://api.pokemontcg.io/v2/cards?q=name:";
-        for (int i = 0; i < pokemonNames.Length; i++) StartCoroutine(GetRequest(url + pokemonNames[i]));
-        
+        StartCoroutine(GetRequest("https://api.pokemontcg.io/v2/cards?q=hp%3A%5B150%20TO%20%2A%5D"));
         
         IEnumerator GetRequest(string url)
         {
@@ -88,40 +86,42 @@ public class CardsManager : MonoBehaviour
             JSONNode fileInfo = JSON.Parse(jsonFile);
             var allCards = fileInfo["data"];
 
-
-            // Get Sprite Texture
-            string spriteUrl = allCards[0]["images"]["small"];
-            UnityWebRequest uwrTexture = UnityWebRequestTexture.GetTexture(spriteUrl);
-            yield return uwrTexture.SendWebRequest();
-
-
-            // Instantiate new Card GameObject
-            RectTransform newCardObj = Instantiate(pokemonCardPrefab).GetComponent<RectTransform>();
-            newCardObj.SetParent(CardsParent.transform);
-            newCardObj.name += ": " + allCards[0]["name"];
+            for (int i = 0; i < 50; i++)
+            {
+                // Get Sprite Texture
+                string spriteUrl = allCards[i]["images"]["small"];
+                UnityWebRequest uwrTexture = UnityWebRequestTexture.GetTexture(spriteUrl);
+                yield return uwrTexture.SendWebRequest();
 
 
-            // Assign the values
-            Card card = newCardObj.GetComponent<Card>();
-            card.CardData.ImageURL = spriteUrl;
-            card.CardData.ID = allCards[0]["id"];
-            card.CardData.HP = allCards[0]["hp"];
-            card.CardData.Name = allCards[0]["name"];
-            card.CardData.Rarity = allCards[0]["rarity"];
-            card.CardData.Type = allCards[0]["types"].ToString();
-            card.CardData.Texture = DownloadHandlerTexture.GetContent(uwrTexture);
+                // Instantiate new Card GameObject
+                RectTransform newCardObj = Instantiate(pokemonCardPrefab).GetComponent<RectTransform>();
+                newCardObj.SetParent(CardsParent.transform, false);
+                newCardObj.name += ": " + allCards[i]["name"];
+
+
+                // Assign the values
+                Card card = newCardObj.GetComponent<Card>();
+                card.CardData.ImageURL = spriteUrl;
+                card.CardData.ID = allCards[i]["id"];
+                card.CardData.HP = allCards[i]["hp"];
+                card.CardData.Name = allCards[i]["name"];
+                card.CardData.Rarity = allCards[i]["rarity"];
+                card.CardData.Type = allCards[i]["types"].ToString();
+                card.CardData.Texture = DownloadHandlerTexture.GetContent(uwrTexture);
 
 
 
-            Cards.Add(card);
-            ChecKDictionary(ref DictRarity, ref TotalRarities,ref  card, card.CardData.Rarity, true);
-            ChecKDictionary(ref DictType, ref TotalTypes, ref card, card.CardData.Type, false);
+                Cards.Add(card);
+                ChecKDictionary(ref DictRarity, ref TotalRarities,ref  card, card.CardData.Rarity, true);
+                ChecKDictionary(ref DictType, ref TotalTypes, ref card, card.CardData.Type, false);
 
 
-            // If all of the cards are created Invoke the event
-            cardsCreated++;
-            if (cardsCreated == pokemonNames.Length) OnFinishedInitializing?.Invoke();
+                // If all of the cards are created Invoke the event
+                cardsCreated++;
+            }
         }
+        OnFinishedInitializing?.Invoke();
     }
 
     void ChecKDictionary(ref Dictionary<string, List<Card>> dictionary, ref List<string> list, ref Card card, string cardData, bool isRarity)

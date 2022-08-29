@@ -3,13 +3,12 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
 using System.Collections.Generic;
-using System.Xml;
-using System;
 
 
 /* The purpose of this script is: to Instantiate all the cards we want the player to have access to
  * This script is attached to the GameManager GO so it can be called from anywhere at any time
 */
+
 
 /// <summary>
 /// This class has a 2D list. The first index represents the deck and the second the id of the cards
@@ -32,29 +31,33 @@ public class CardsManager : MonoBehaviour
 
 
 
-
     //*****Public*****//
     [HideInInspector]
+    public AllDecks AllDecks = new AllDecks();
+
+    [HideInInspector]
     public GameObject CardsParent;
-    
+    [HideInInspector]
     public List<Card> Cards = new List<Card>();
 
     [HideInInspector]
     public List<string> TotalRarities = new List<string>();
     public Dictionary<string, List<Card>> DictRarity = new Dictionary<string, List<Card>>();
     
-    //[HideInInspector]
+    [HideInInspector]
     public List<string> TotalTypes = new List<string>();
     public Dictionary<string, List<Card>> DictType = new Dictionary<string, List<Card>>();
 
+    [Tooltip("The Maximum number of cards each deck can take")]
     public int MaxDeckCards;
 
-    public AllDecks AllDecks = new AllDecks();
 
 
     //*****Serialized*****//
     [SerializeField] GameObject pokemonCardPrefab;
-    [SerializeField] string[] pokemonNames;
+    [SerializeField, Tooltip("The total number of cards which will be loaded")] 
+    int numberOfCards;
+
 
 
     //*****Private*****//
@@ -86,7 +89,7 @@ public class CardsManager : MonoBehaviour
             JSONNode fileInfo = JSON.Parse(jsonFile);
             var allCards = fileInfo["data"];
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < numberOfCards; i++)
             {
                 // Get Sprite Texture
                 string spriteUrl = allCards[i]["images"]["small"];
@@ -110,6 +113,11 @@ public class CardsManager : MonoBehaviour
                 card.CardData.Type = allCards[i]["types"].ToString();
                 card.CardData.Texture = DownloadHandlerTexture.GetContent(uwrTexture);
 
+                card.CardData.AttackName = allCards[i]["attacks"][0]["name"];
+                card.CardData.Damage = allCards[i]["attacks"][0]["damage"];
+                card.CardData.Effect = allCards[i]["attacks"][0]["text"];
+                card.CardData.Weakness = allCards[i]["weaknesses"][0]["type"];
+
 
 
                 Cards.Add(card);
@@ -119,10 +127,12 @@ public class CardsManager : MonoBehaviour
 
                 // If all of the cards are created Invoke the event
                 cardsCreated++;
+                if (cardsCreated >= numberOfCards) OnFinishedInitializing?.Invoke();
             }
         }
-        OnFinishedInitializing?.Invoke();
     }
+
+
 
     void ChecKDictionary(ref Dictionary<string, List<Card>> dictionary, ref List<string> list, ref Card card, string cardData, bool isRarity)
     {

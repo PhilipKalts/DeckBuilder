@@ -1,12 +1,21 @@
 using System.IO;
 using UnityEngine;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
 
+
+/* The purpose of this script is: to create a saving system
+ * We save/load the class AllDecks
+ * 
+ * When the player first starts we load the previous save
+ * If none exists, we load an empty All Decks class
+ * 
+ * The class is static, in order to be accessed from anywhere
+*/
+
+
 public static class SaveSystem
 {
-	//public static PlayerData playerData;
 	public static string file = "player.data";
 
 	static string path = Application.persistentDataPath + "/" + file;

@@ -17,6 +17,7 @@ public class UIMaxDeckMessage : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
+
     private void OnEnable()
     {
         GameManager.Instance.UIEventsManager.OnMaxDeck += ShowMessage;
@@ -27,6 +28,7 @@ public class UIMaxDeckMessage : MonoBehaviour
         GameManager.Instance.UIEventsManager.OnMaxDeck -= ShowMessage;
     }
 
+
     void ShowMessage()
     {
         rectTransform.DOScale(1, 0.75f).OnComplete(EnableButtons);
@@ -36,6 +38,7 @@ public class UIMaxDeckMessage : MonoBehaviour
             rectMessage.DOScale(1, 0.3f);
         }
     }
+
 
     public void HideMessage()
     {

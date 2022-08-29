@@ -4,7 +4,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-/* The purpose of this script is:
+/* The purpose of this script is: to show the player the details of the
+ * card s/he pressed
+ * 
+ * Furthermore, turning on/off the toggles according whether or not 
+ * the decks hold the card
 */
 
 public class UICardDetails : MonoBehaviour
@@ -51,7 +55,9 @@ public class UICardDetails : MonoBehaviour
         canvasGroup.blocksRaycasts = true;
 
         rawImage.texture = CardData.Texture;
-        txtDetails.text = $"Name: {CardData.Name} <br>HP: {CardData.HP}<br>Rarity: {CardData.Rarity}";
+        txtDetails.text = $"Name: {CardData.Name}<br>HP: {CardData.HP}<br>Rarity: {CardData.Rarity}<br>" +
+            $"AttackName: {CardData.AttackName}<br>Damage: {CardData.Damage}<br>" +
+            $"Effect: {CardData.Effect} <br>Weakness {CardData.Weakness}";
     }
 
 

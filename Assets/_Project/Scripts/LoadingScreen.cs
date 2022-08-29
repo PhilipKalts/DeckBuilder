@@ -3,17 +3,25 @@ using UnityEngine;
 using DG.Tweening;
 using System.Collections;
 
-/* The purpose of this script is:
+/* The purpose of this script is: to create a loading screen
+ * while the cards are being loaded
+ * 
+ * At the same time we want to give the player an interesting loading screen
+ * That's why we'll show tips and a card animation
 */
 
 public class LoadingScreen : MonoBehaviour
 {
+    #region Variables
+
     [SerializeField] TextMeshProUGUI txtTips;
     [SerializeField, Tooltip("Give the player something to read while waiting for the " +
         "cards to initialized")]
     string[] tips;
 
     [SerializeField] RectTransform loadingImage;
+
+    #endregion
 
 
 
@@ -48,11 +56,11 @@ public class LoadingScreen : MonoBehaviour
     {
         sequence = DOTween.Sequence();
 
-        sequence.Append(loadingImage.DORotate(new Vector3(0,0, -50), 0.5f, RotateMode.FastBeyond360).SetRelative(true).SetEase(Ease.Linear));
-        sequence.Append(loadingImage.DORotate(new Vector3(0,0, 360), 0.75f, RotateMode.FastBeyond360).SetRelative(true));
+        sequence.Append(loadingImage.DORotate(new Vector3(0,0, -50), 0.3f, RotateMode.FastBeyond360).SetRelative(true).SetEase(Ease.Linear));
+        sequence.Append(loadingImage.DORotate(new Vector3(0,0, 360), 0.5f, RotateMode.FastBeyond360).SetRelative(true));
 
-        sequence.Append(loadingImage.DORotate(new Vector3(0,0, 50), 0.5f, RotateMode.FastBeyond360).SetRelative(true).SetEase(Ease.Linear));
-        sequence.Append(loadingImage.DORotate(new Vector3(0,0, -360), 0.75f, RotateMode.FastBeyond360).SetRelative(true));
+        sequence.Append(loadingImage.DORotate(new Vector3(0,0, 50), 0.3f, RotateMode.FastBeyond360).SetRelative(true).SetEase(Ease.Linear));
+        sequence.Append(loadingImage.DORotate(new Vector3(0,0, -360), 0.5f, RotateMode.FastBeyond360).SetRelative(true));
 
         sequence.SetLoops(-1);
     }

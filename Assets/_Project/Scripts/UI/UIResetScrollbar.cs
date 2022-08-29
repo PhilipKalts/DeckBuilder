@@ -29,13 +29,14 @@ public class UIResetScrollbar : MonoBehaviour
     }
 
 
+    WaitForSeconds waitScroll = new WaitForSeconds(0.075f);
     public void ResetBar()
     {
         StartCoroutine(Scroll());
         
         IEnumerator Scroll()
         {
-            yield return null;
+            yield return waitScroll;
             scrollbar.value = 1;
         }
     }

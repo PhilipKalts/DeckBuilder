@@ -14,7 +14,6 @@ public class Card : MonoBehaviour
     {
         rawImage = GetComponent<RawImage>();
         rawImage.texture = CardData.Texture;
-        RectTransform rectTransform = GetComponent<RectTransform>();
     }
 
     public void ButtonPressCard()

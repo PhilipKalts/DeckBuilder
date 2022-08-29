@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-/* The purpose of this script is:
+/* The purpose of this script is: to show the player's deck accordingly with the
+ * dropdown index
 */
 
 public class UIShowMyDeck : MonoBehaviour
@@ -14,32 +15,26 @@ public class UIShowMyDeck : MonoBehaviour
     [SerializeField] Transform deactivatedParent, activatedParent;
 
 
-    UIButtons buttons;
+    UISorting uiSorting;
 
 
     private void Awake()
     {
-        buttons = GetComponent<UIButtons>();
+        uiSorting = GetComponent<UISorting>();
     }
 
 
-    #region Dropdown
 
     public void DropdownChanged()
     {
-        // All Cards
-        if (dropdownDecks.value == 0)
-        {
-            ActivateAllCards();
-        }
+        // Value 0 means show all cards
+        if (dropdownDecks.value == 0) ActivateAllCards();
+        // The other values represent the number of the list -1
         else ShowMyDeck(dropdownDecks.value - 1);
 
-        if (dropdownSorting.value == 1) buttons.SortByHP();
-
-        GameManager.Instance.UIEventsManager.OnChangedScroll?.Invoke();
+        if (dropdownSorting.value == 1) uiSorting.SortByHP();
     }
 
-    #endregion
 
 
     public void ShowMyDeck(int deckIndex)

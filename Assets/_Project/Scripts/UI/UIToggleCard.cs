@@ -1,21 +1,27 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
-/* The purpose of this script is:
+
+/* The purpose of this script is: to add/remove the card from the
+ * according deck when the toggle is pressed
 */
+
 
 public class UIToggleCard : MonoBehaviour
 {
     [SerializeField] UICardDetails cardDetails;
     Toggle toggle;
 
+    // This list is to make things easier to read list from the GameManager.Instance.CardsManager.AllDecks
     List<string> cardsList = new List<string>();
+
 
     private void Start()
     {
         toggle = GetComponent<Toggle>();
     }
+
 
     public void ToggleCard(int deckIndex)
     {

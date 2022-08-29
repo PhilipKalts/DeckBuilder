@@ -66,11 +66,6 @@ MonoBehaviour:
   TotalRarities: []
   TotalTypes: []
   MaxDeckCards: 2
-  MyDeck:
-    MyDecks:
-    - MyCards: []
-    - MyCards: []
-    - MyCards: []
   pokemonCardPrefab: {fileID: 8266962865483938448, guid: 7137a2d643adf6e4c80fb21fae237369,
     type: 3}
   pokemonNames:
@@ -78,6 +73,7 @@ MonoBehaviour:
   - Pikachu
   - Charizard
   - Charmander
+  - Aggron
 --- !u!114 &-1624786875803592391
 MonoBehaviour:
   m_ObjectHideFlags: 0

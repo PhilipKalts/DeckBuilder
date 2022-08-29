@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,11 +15,28 @@ public class UIResetScrollbar : MonoBehaviour
     [SerializeField] Scrollbar scrollbar;
 
 
-    private void OnEnable() => GameManager.Instance.CardsManager.OnFinishedInitializing += ResetBar;
+    private void OnEnable()
+    {
+        GameManager.Instance.CardsManager.OnFinishedInitializing += ResetBar;
+        GameManager.Instance.UIEventsManager.OnChangedScroll += ResetBar;
+    }
 
 
-    private void OnDisable() => GameManager.Instance.CardsManager.OnFinishedInitializing -= ResetBar;
+    private void OnDisable()
+    {
+        GameManager.Instance.CardsManager.OnFinishedInitializing -= ResetBar;
+        GameManager.Instance.UIEventsManager.OnChangedScroll -= ResetBar;
+    }
 
 
-    public void ResetBar() => scrollbar.value = 1;
+    public void ResetBar()
+    {
+        StartCoroutine(Scroll());
+        
+        IEnumerator Scroll()
+        {
+            yield return null;
+            scrollbar.value = 1;
+        }
+    }
 }

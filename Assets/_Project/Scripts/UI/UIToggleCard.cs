@@ -10,7 +10,7 @@ public class UIToggleCard : MonoBehaviour
     [SerializeField] UICardDetails cardDetails;
     Toggle toggle;
 
-    public List<string> list = new List<string>();
+    List<string> cardsList = new List<string>();
 
     private void Start()
     {
@@ -19,21 +19,22 @@ public class UIToggleCard : MonoBehaviour
 
     public void ToggleCard(int deckIndex)
     {
-        list = GameManager.Instance.CardsManager.AllDecks.MyCards[deckIndex];
+        // Make it easier to read
+        cardsList = GameManager.Instance.CardsManager.AllDecks.MyCards[deckIndex];
 
         //If we want to add a card to our deck but we have reached the maximum number
-        if (toggle.isOn && list.Count >= GameManager.Instance.CardsManager.MaxDeckCards)
+        if (toggle.isOn && cardsList.Count >= GameManager.Instance.CardsManager.MaxDeckCards)
         {
             toggle.isOn = false;
             GameManager.Instance.UIEventsManager.OnMaxDeck?.Invoke();
             return;
         }
 
-        print(toggle.isOn);
-        if (toggle.isOn) list.Add(cardDetails.CardData.ID);
-        else list.Remove(cardDetails.CardData.ID);
+        if (toggle.isOn) cardsList.Add(cardDetails.CardData.ID);
+        else cardsList.Remove(cardDetails.CardData.ID);
 
 
-        GameManager.Instance.CardsManager.AllDecks.MyCards[deckIndex] = list;
+        GameManager.Instance.CardsManager.AllDecks.MyCards[deckIndex] = cardsList;
+        SaveSystem.Save(GameManager.Instance.CardsManager.AllDecks);
     }
 }

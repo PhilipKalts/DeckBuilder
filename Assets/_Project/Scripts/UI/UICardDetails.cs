@@ -51,7 +51,7 @@ public class UICardDetails : MonoBehaviour
         canvasGroup.blocksRaycasts = true;
 
         rawImage.texture = CardData.Texture;
-        txtDetails.text = $"name: {CardData.Name} <br>HP: {CardData.HP}<br>Rarity: {CardData.Rarity}";
+        txtDetails.text = $"Name: {CardData.Name} <br>HP: {CardData.HP}<br>Rarity: {CardData.Rarity}";
     }
 
 

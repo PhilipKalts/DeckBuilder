@@ -14,6 +14,7 @@ using System.Xml;
 /// This class has a 2D list. The first index represents the deck and the second the id of the cards
 /// This class is meant to be saved
 /// </summary>
+[System.Serializable]
 public class AllDecks
 {
     public List<List<string>> MyCards = new List<List<string>>();
@@ -62,14 +63,11 @@ public class CardsManager : MonoBehaviour
 
     private void Start()
     {
-        // Insert lists to the 2d List
-        for (int i = 0; i < 3; i++)
-        {
-            List<string> s = new List<string>();
-            AllDecks.MyCards.Add(s);
-        }
+        //SaveSystem.Delete();
+        AllDecks = SaveSystem.Load();
         CreateCards();
     }
+
 
     void CreateCards()
     {

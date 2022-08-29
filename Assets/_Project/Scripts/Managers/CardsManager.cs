@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.Networking;
 using System.Collections.Generic;
 using System.Xml;
+using System;
 
 
 /* The purpose of this script is: to Instantiate all the cards we want the player to have access to
@@ -30,17 +31,19 @@ public class CardsManager : MonoBehaviour
     public CardChanges OnFinishedInitializing;
 
 
-    //*****Hidden*****//
-    [HideInInspector]
-    public GameObject CardsParent;
 
 
     //*****Public*****//
+    [HideInInspector]
+    public GameObject CardsParent;
+    
     public List<Card> Cards = new List<Card>();
 
+    [HideInInspector]
     public List<string> TotalRarities = new List<string>();
     public Dictionary<string, List<Card>> DictRarity = new Dictionary<string, List<Card>>();
     
+    //[HideInInspector]
     public List<string> TotalTypes = new List<string>();
     public Dictionary<string, List<Card>> DictType = new Dictionary<string, List<Card>>();
 
@@ -63,7 +66,6 @@ public class CardsManager : MonoBehaviour
 
     private void Start()
     {
-        //SaveSystem.Delete();
         AllDecks = SaveSystem.Load();
         CreateCards();
     }
@@ -112,8 +114,8 @@ public class CardsManager : MonoBehaviour
 
 
             Cards.Add(card);
-            ChecKDictionary(ref DictRarity, ref TotalRarities, card, card.CardData.Rarity);
-            ChecKDictionary(ref DictType, ref TotalTypes, card, card.CardData.Type);
+            ChecKDictionary(ref DictRarity, ref TotalRarities,ref  card, card.CardData.Rarity, true);
+            ChecKDictionary(ref DictType, ref TotalTypes, ref card, card.CardData.Type, false);
 
 
             // If all of the cards are created Invoke the event
@@ -122,8 +124,16 @@ public class CardsManager : MonoBehaviour
         }
     }
 
-    void ChecKDictionary(ref Dictionary<string, List<Card>> dictionary, ref List<string> list, Card card, string cardData)
+    void ChecKDictionary(ref Dictionary<string, List<Card>> dictionary, ref List<string> list, ref Card card, string cardData, bool isRarity)
     {
+        if (cardData == null)
+        {
+            if (isRarity) card.CardData.Rarity = "Unknown";
+            else card.CardData.Type = "[\"Uknown\"]";
+            
+            cardData = "Unknown";
+        }
+
         if (!dictionary.ContainsKey(cardData))
         {
             list.Add(cardData);

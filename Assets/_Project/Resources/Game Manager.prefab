@@ -65,7 +65,7 @@ MonoBehaviour:
   Cards: []
   TotalRarities: []
   TotalTypes: []
-  MaxDeckCards: 2
+  MaxDeckCards: 20
   pokemonCardPrefab: {fileID: 8266962865483938448, guid: 7137a2d643adf6e4c80fb21fae237369,
     type: 3}
   pokemonNames:
@@ -74,6 +74,52 @@ MonoBehaviour:
   - Charizard
   - Charmander
   - Aggron
+  - Bulbasaur
+  - Ivysaur
+  - Charmeleon
+  - Squirtle
+  - Blastoise
+  - Caterpie
+  - Metapod
+  - Butterfree
+  - Weedle
+  - Kakuna
+  - Beedrill
+  - Pidgey
+  - Pidgeotto
+  - Spearow
+  - Fearow
+  - Ekans
+  - Arbok
+  - Raichu
+  - Sandshrew
+  - Sandslash
+  - Nidorina
+  - Nidoqueen
+  - Nidorino
+  - Nidoking
+  - Clefairy
+  - Clefable
+  - Vulpix
+  - Ninetales
+  - Jigglypuff
+  - Wigglytuff
+  - Zubat
+  - Golbat
+  - Oddish
+  - Gloom
+  - Vileplume
+  - Paras
+  - Parasect
+  - Venonat
+  - Venomoth
+  - Diglett
+  - Dugtrio
+  - Meowth
+  - Persian
+  - Psyduck
+  - Golduck
+  - Venusaur
 --- !u!114 &-1624786875803592391
 MonoBehaviour:
   m_ObjectHideFlags: 0

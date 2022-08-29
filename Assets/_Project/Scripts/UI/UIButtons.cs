@@ -273,4 +273,11 @@ public class UIButtons : MonoBehaviour
 
     #endregion
 
+
+
+    #region Other Buttons
+
+    public void QuitApplication() => Application.Quit();    
+
+    #endregion
 }
